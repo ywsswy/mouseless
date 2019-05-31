@@ -53,7 +53,7 @@ def OnPress(key):
 			YGlobalScript.mouse_controller_.move(10,0)
 
 def OnRelease(key):
-	print('{0} release'.format(key))
+	# print('{0} release'.format(key))
 	if key == pynput.keyboard.Key.scroll_lock:
 		return False
 	elif key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r:
@@ -67,6 +67,16 @@ def OnRelease(key):
 			ButtonLeft(False)
 		elif IsKey(key, YGlobalScript.right_key_):
 			ButtonRight(False)
+
+print("""**使用说明**
+键盘组合键	等价于鼠标的操作
+Ctrl + 'm'	鼠标向左移动
+Ctrl + ','	鼠标向下移动
+Ctrl + '.	鼠标向上移动
+Ctrl + '/'	鼠标向右移动
+Ctrl + ':'	按下鼠标左键
+Ctrl + '''	按下鼠标右键
+Scroll Lock	终止程序""")
 
 with pynput.keyboard.Listener(on_press = OnPress,on_release = OnRelease) as listener:
 	listener.join()
