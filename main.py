@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 import pynput
 class YGlobalScript(object):
-	left_key_ = ';'
-	right_key_ = '\''
+	dd = 9
+	left_key_ = '\''
+	right_key_ = ';'
 	move_left_key_ = 'm'
 	move_down_key_ = ','
 	move_up_key_ = '.'
@@ -44,13 +47,13 @@ def OnPress(key):
 		elif not YGlobalScript.right_flag_ and IsKey(key, YGlobalScript.right_key_):
 			ButtonRight(True)
 		elif IsKey(key, YGlobalScript.move_down_key_):
-			YGlobalScript.mouse_controller_.move(0,10)
+			YGlobalScript.mouse_controller_.move(0,YGlobalScript.dd)
 		elif IsKey(key, YGlobalScript.move_up_key_):
-			YGlobalScript.mouse_controller_.move(0,-10)
+			YGlobalScript.mouse_controller_.move(0,-YGlobalScript.dd)
 		elif IsKey(key, YGlobalScript.move_left_key_):
-			YGlobalScript.mouse_controller_.move(-10,0)
+			YGlobalScript.mouse_controller_.move(-YGlobalScript.dd,0)
 		elif IsKey(key, YGlobalScript.move_right_key_):
-			YGlobalScript.mouse_controller_.move(10,0)
+			YGlobalScript.mouse_controller_.move(YGlobalScript.dd,0)
 
 def OnRelease(key):
 	# print('{0} release'.format(key))
@@ -74,8 +77,8 @@ Ctrl + 'm'	鼠标向左移动
 Ctrl + ','	鼠标向下移动
 Ctrl + '.	鼠标向上移动
 Ctrl + '/'	鼠标向右移动
-Ctrl + ':'	按下鼠标左键
-Ctrl + '''	按下鼠标右键
+Ctrl + ':'	按下鼠标右键
+Ctrl + '''	按下鼠标左键
 Scroll Lock	终止程序""")
 
 with pynput.keyboard.Listener(on_press = OnPress,on_release = OnRelease) as listener:
