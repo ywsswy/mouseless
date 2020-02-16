@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import pynput
-class YGlobalScript(object):
+class YGlobal(object):
     dd = 9
     left_key_ = '\''
     right_key_ = ';'
@@ -13,7 +13,7 @@ class YGlobalScript(object):
     mouse_controller_ = pynput.mouse.Controller()
     left_flag_ = False
     right_flag_ = False
-    
+
 def IsKey(key, ch):
     if key == pynput.keyboard.KeyCode.from_char(ch):
         return True
@@ -21,54 +21,53 @@ def IsKey(key, ch):
         return False
 
 def ButtonLeft(press_flag):
-    YGlobalScript.left_flag_ = press_flag
+    YGlobal.left_flag_ = press_flag
     if press_flag:
-        YGlobalScript.mouse_controller_.press(pynput.mouse.Button.left)
+        YGlobal.mouse_controller_.press(pynput.mouse.Button.left)
     else:
-        YGlobalScript.mouse_controller_.release(pynput.mouse.Button.left)
+        YGlobal.mouse_controller_.release(pynput.mouse.Button.left)
     return None
-    
+
 def ButtonRight(press_flag):
-    YGlobalScript.right_flag_ = press_flag
+    YGlobal.right_flag_ = press_flag
     if press_flag:
-        YGlobalScript.mouse_controller_.press(pynput.mouse.Button.right)
+        YGlobal.mouse_controller_.press(pynput.mouse.Button.right)
     else:
-        YGlobalScript.mouse_controller_.release(pynput.mouse.Button.right)
+        YGlobal.mouse_controller_.release(pynput.mouse.Button.right)
     return None
-    
 
 def OnPress(key):
     # print('{0} press'.format(key)) #
-    if (key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r) and not YGlobalScript.ctrl_flag_:
-        YGlobalScript.ctrl_flag_ = True
-    elif YGlobalScript.ctrl_flag_:
-        if not YGlobalScript.left_flag_ and IsKey(key, YGlobalScript.left_key_):
+    if (key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r) and not YGlobal.ctrl_flag_:
+        YGlobal.ctrl_flag_ = True
+    elif YGlobal.ctrl_flag_:
+        if not YGlobal.left_flag_ and IsKey(key, YGlobal.left_key_):
             ButtonLeft(True)
-        elif not YGlobalScript.right_flag_ and IsKey(key, YGlobalScript.right_key_):
+        elif not YGlobal.right_flag_ and IsKey(key, YGlobal.right_key_):
             ButtonRight(True)
-        elif IsKey(key, YGlobalScript.move_down_key_):
-            YGlobalScript.mouse_controller_.move(0,YGlobalScript.dd)
-        elif IsKey(key, YGlobalScript.move_up_key_):
-            YGlobalScript.mouse_controller_.move(0,-YGlobalScript.dd)
-        elif IsKey(key, YGlobalScript.move_left_key_):
-            YGlobalScript.mouse_controller_.move(-YGlobalScript.dd,0)
-        elif IsKey(key, YGlobalScript.move_right_key_):
-            YGlobalScript.mouse_controller_.move(YGlobalScript.dd,0)
+        elif IsKey(key, YGlobal.move_down_key_):
+            YGlobal.mouse_controller_.move(0,YGlobal.dd)
+        elif IsKey(key, YGlobal.move_up_key_):
+            YGlobal.mouse_controller_.move(0,-YGlobal.dd)
+        elif IsKey(key, YGlobal.move_left_key_):
+            YGlobal.mouse_controller_.move(-YGlobal.dd,0)
+        elif IsKey(key, YGlobal.move_right_key_):
+            YGlobal.mouse_controller_.move(YGlobal.dd,0)
 
 def OnRelease(key):
     # print('{0} release'.format(key))
     if key == pynput.keyboard.Key.scroll_lock:
         return False
     elif key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r:
-        YGlobalScript.ctrl_flag_ = False
-        if YGlobalScript.left_flag_:
+        YGlobal.ctrl_flag_ = False
+        if YGlobal.left_flag_:
             ButtonLeft(False)
-        if YGlobalScript.right_flag_:
+        if YGlobal.right_flag_:
             ButtonRight(False)
-    elif YGlobalScript.ctrl_flag_:
-        if IsKey(key, YGlobalScript.left_key_):
+    elif YGlobal.ctrl_flag_:
+        if IsKey(key, YGlobal.left_key_):
             ButtonLeft(False)
-        elif IsKey(key, YGlobalScript.right_key_):
+        elif IsKey(key, YGlobal.right_key_):
             ButtonRight(False)
 
 print("""**使用说明**
