@@ -37,4 +37,4 @@
 
 * 如果键盘上没有Scroll Lock键怎么办。。。这个Alt+Space杀死程序吧。
 
-* Windows10测试成功的环境是在（Python或者Anaconda Prompt）中安装pynput库（如果用WSL则不成功）
+* Windows10测试成功的环境是在官网下载的Python3中安装pynput库（如果用WSL或者Anaconda Prompt则不成功）
