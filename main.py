@@ -37,7 +37,7 @@ def ButtonRight(press_flag):
     return None
 
 def OnPress(key):
-    # print('{0} press'.format(key)) #
+    print('{0} press'.format(key)) #
     if (key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r) and not YGlobal.ctrl_flag_:
         YGlobal.ctrl_flag_ = True
     elif YGlobal.ctrl_flag_:
@@ -55,7 +55,7 @@ def OnPress(key):
             YGlobal.mouse_controller_.move(YGlobal.dd,0)
 
 def OnRelease(key):
-    # print('{0} release'.format(key))
+    print('{0} release'.format(key))
     if key == pynput.keyboard.Key.scroll_lock:
         return False
     elif key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r:
