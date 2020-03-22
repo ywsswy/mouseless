@@ -6,7 +6,7 @@ class YGlobal(object):
     dd = 9
     left_key_ = 222 #'\''
     right_key_ = 186 #';'
-    move_left_key_ = 77 #'\r'
+    move_left_key_ = 77 #'m'
     move_down_key_ = 188 #','
     move_up_key_ = 190 #'.'
     move_right_key_ = 191 #'/'
