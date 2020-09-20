@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import pynput
+import time
 class YGlobal(object):
     speed_up = 6
     dd = 9
@@ -39,7 +40,9 @@ def ButtonRight(press_flag):
     return None
 
 def OnPress(key):
-    # print('{0} press'.format(key))
+    time_struct = time.localtime(time.time())
+    b = time.strftime('%Y %m %d %H:%M',time_struct)
+    print('{1} {0} press'.format(key, b))
     if (key == pynput.keyboard.Key.alt_l or key == pynput.keyboard.Key.alt_r) \
         and not YGlobal.alt_flag_:
         YGlobal.alt_flag_ = True
