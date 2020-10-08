@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 
+# for windows & linux
+
 import pynput
 import time
 class YGlobal(object):
     speed_up = 6
     dd = 9
-    left_key_ = 222 #'\''
-    right_key_ = 186 #';'
-    move_left_key_ = 77 #'m'
-    move_down_key_ = 188 #','
-    move_up_key_ = 190 #'.'
-    move_right_key_ = 191 #'/'
+    left_key_ = pynput.keyboard.Key.page_up
+    right_key_ = pynput.keyboard.Key.page_down
+    move_left_key_ = pynput.keyboard.Key.left
+    move_down_key_ = pynput.keyboard.Key.down
+    move_up_key_ = pynput.keyboard.Key.up
+    move_right_key_ = pynput.keyboard.Key.right
+    exit_key_ = 188 # '<'
     ctrl_flag_ = False
     mouse_controller_ = pynput.mouse.Controller()
     left_flag_ = False
@@ -18,10 +21,13 @@ class YGlobal(object):
     alt_flag_ = False
 
 def IsKey(key, ch):
-    if hasattr(key, "vk") and key.vk == ch:
-        return True
+    if hasattr(key, "vk"):
+        if key.vk == ch:
+            return True
     else:
-        return False
+        if key == ch:
+            return True
+    return False
 
 def ButtonLeft(press_flag):
     YGlobal.left_flag_ = press_flag
@@ -76,10 +82,8 @@ def OnPress(key):
                 YGlobal.mouse_controller_.move(YGlobal.dd,0)
 
 def OnRelease(key):
-    # print('{0} release'.format(key))
-    if key == pynput.keyboard.Key.scroll_lock:
-        return False
-    elif key == pynput.keyboard.Key.alt_l or key == pynput.keyboard.Key.alt_r:
+    print('{0} release'.format(key)) # c++ log
+    if key == pynput.keyboard.Key.alt_l or key == pynput.keyboard.Key.alt_r:
         YGlobal.alt_flag_ = False
     elif key == pynput.keyboard.Key.ctrl_l or key == pynput.keyboard.Key.ctrl_r:
         YGlobal.ctrl_flag_ = False
@@ -92,16 +96,18 @@ def OnRelease(key):
             ButtonLeft(False)
         elif IsKey(key, YGlobal.right_key_):
             ButtonRight(False)
+        elif IsKey(key, YGlobal.exit_key_):
+            return False
 
 print("""**使用说明**
 键盘组合键    等价于鼠标的操作
-Ctrl + 'm'    鼠标向左移动
-Ctrl + ','    鼠标向下移动
-Ctrl + '.    鼠标向上移动
-Ctrl + '/'    鼠标向右移动
-Ctrl + ':'    按下鼠标右键
-Ctrl + '''    按下鼠标左键
-Scroll Lock    终止程序
+Ctrl + '←'      鼠标向左移动
+Ctrl + '↓'      鼠标向下移动
+Ctrl + '↑'      鼠标向上移动
+Ctrl + '→'      鼠标向右移动
+Ctrl + pageup   按下鼠标左键
+Ctrl + pagedown 按下鼠标右键
+Ctrl + '<'      终止程序
 (Alt键可以6倍速移动)""")
 
 with pynput.keyboard.Listener(on_press = OnPress,on_release = OnRelease) as listener:
